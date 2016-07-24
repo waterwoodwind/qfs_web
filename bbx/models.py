@@ -67,6 +67,12 @@ class bbx_info(models.Model):
     location_hao = models.ForeignKey(Location_hao, verbose_name=u'号')
     relatives = models.CharField(max_length=20, verbose_name=u'亲属名')
     Relationship = models.CharField(max_length=20, verbose_name = u'亲属关系')
+    Donation_certificate_1 = models.FileField(upload_to='Donation_1/',blank=True, verbose_name=u'捐建证书第一页')
+    Donation_certificate_2 = models.FileField(upload_to='Donation_2/',blank=True, verbose_name=u'捐建证书第二页')
+    receipt = models.FileField(upload_to='receipt/',blank=True, verbose_name=u'收据')
+    Conversion_certificate = models.FileField(upload_to='receipt/',blank=True, verbose_name=u'皈依证')
+    master_id_scan = models.FileField(upload_to='master_id_scan/',blank=True, verbose_name=u'本人身份证')
+    relatives_id_scan = models.FileField(upload_to='relatives_id_scan/',blank=True, verbose_name=u'亲属身份证')
 
     class Meta:
         ordering = ["identity_card"]

@@ -1,3 +1,4 @@
+#coding=utf-8
 """
 Django settings for qfs_web project.
 
@@ -121,3 +122,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media').replace('\\', '/') # 文件上传到服务器的路径
+MEDIA_URL = '/media/' # 保持与MEDIA_ROOT访问的一致性
