@@ -12,6 +12,7 @@ class Location_qu(models.Model):
 
     class Meta:
         unique_together = (('name'),)
+        verbose_name_plural = '区设置'
 
     def __unicode__(self):
         return self.name
@@ -24,6 +25,7 @@ class Location_zuo(models.Model):
 
     class Meta:
         unique_together = (('name'),)
+        verbose_name_plural = '座设置'
 
     def __unicode__(self):
         return self.name
@@ -36,6 +38,7 @@ class Location_ceng(models.Model):
 
     class Meta:
         unique_together = (('name'),)
+        verbose_name_plural = '层设置'
 
     def __unicode__(self):
         return self.name
@@ -48,6 +51,7 @@ class Location_hao(models.Model):
 
     class Meta:
         unique_together = (('name'),)
+        verbose_name_plural = '号设置'
 
     def __unicode__(self):
         return self.name
@@ -63,4 +67,11 @@ class bbx_info(models.Model):
     location_hao = models.ForeignKey(Location_hao, verbose_name=u'号')
     relatives = models.CharField(max_length=20, verbose_name=u'亲属名')
     Relationship = models.CharField(max_length=20, verbose_name = u'亲属关系')
+
+    class Meta:
+        ordering = ["identity_card"]
+        verbose_name_plural = u'百宝箱信息'
+
+    def __unicode__(self):
+        return self.identity_card
 
