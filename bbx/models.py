@@ -58,7 +58,7 @@ class Location_hao(models.Model):
 
 class bbx_info(models.Model):
     master = models.CharField(max_length=20, verbose_name=u'捐建信士')
-    identity_card = models.CharField(max_length=20, unique=True, verbose_name=u'身份证')
+    identity_card = models.CharField(max_length=20, verbose_name=u'身份证')
     address = models.TextField(u'地址')
     contact_way = models.CharField(max_length=20, verbose_name=u'联系方式')
     location_qu = models.ForeignKey(Location_qu, verbose_name=u'区')
@@ -77,6 +77,7 @@ class bbx_info(models.Model):
     class Meta:
         ordering = ["identity_card"]
         verbose_name_plural = u'百宝箱信息'
+        unique_together = (("location_qu", "location_zuo", "location_ceng", "location_hao"),)
 
     def __unicode__(self):
         return self.identity_card

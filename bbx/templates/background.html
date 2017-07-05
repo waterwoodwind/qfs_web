@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block maincontents %}
+<!--<div class="container-fluid">
+    <button id="today" class="intext-btn">
+        A区
+    </button>
+    <button id="yesterday" class="intext-btn">
+        B区
+    </button>
+    <button id="last_7_day" class="intext-btn">
+        C区
+    </button>
+    <button id="this_month" class="intext-btn">
+        D区
+    </button>
+    <button id="all" class="intext-btn">
+        E区
+    </button>
+    <button id="reset_filter" class="intext-btn">
+        重置筛选
+    </button>
+    <br>
+    <button id="export-file" class="intext-btn">
+        导出为csv文件
+    </button>-->
+    <br>
+    <div id="example"></div>
+</div><!-- /.container -->
+<script>
+var data = new Array();
+data = {{ json_data | safe}};
+for (var i = 0; i < data.length; i++) {
+        data[i]["ID"] = edit_id(data[i]["ID"])
+};
+var container = document.getElementById('example');
+var hot = new Handsontable(container, {
+  data: data,
+  rowHeaders: true,
+  colHeaders: ["捐建信士","身份证","地址","联系方式","区","座","层","号","亲属名","亲属关系","操作"],
+  columns: [
+        {data: '捐建信士'},
+        {data: '身份证'},
+        {data: '地址'},
+        {data: '联系方式'},
+        {data: '区'},
+        {data: '座'},
+        {data: '层'},
+        {data: '号'},
+        {data: '亲属名'},
+        {data: '亲属关系'},
+        {data: 'ID',
+        renderer: 'html',},
+    ],
+  dropdownMenu: ['filter_by_condition', 'filter_by_value', 'filter_action_bar'],
+  readOnly: true,
+  colWidths: [88, 65, 65, 88, 88, 88, 88, 88, 88, 88, 88],
+  filters: true,
+  height: getHeight()
+});
+
+function getHeight() {
+        return $(window).height() - $('nav').outerHeight(true) * 2;
+    }
+
+function attachment(value) {
+        var the_url;
+        if (value == ""){
+            return "无";
+        }
+        else{
+            the_url = "/media/112233".replace("112233", value);
+            return [
+                '<a href="' + the_url + '" target="_blank">' + "查看" + '</a>'
+            ].join('');
+        }
+    }
+
+function edit_id(value) {
+        var the_url;
+        if (value == ""){
+            return "无";
+        }
+        else{
+            the_url = "/admin/main/qa_info/112233/change/".replace("112233", value);
+            return [
+                '<a href="' + the_url + '" target="_blank">' + "修改" + '</a>'
+            ].join('');
+        }
+    }
+
+</script>
+{% endblock %}

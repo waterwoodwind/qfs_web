@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block maincontents %}
+<script src="/static/echart-3.2.1/echarts.js"></script>
+<div id="main" style="width: 900px;height:600px;"></div>
+
+<script type="text/javascript">
+        //var count_data = {{json_count | safe}};
+        //console.log(static_down);
+        //console.log(static_up);
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+    	    title : {
+    	        text: '严重程度散点图',
+    	        subtext: '每月统计',
+    	        x:'center'
+    	    },
+    	    tooltip : {
+                show: false,
+    	        trigger: 'axis',
+    	        formatter: "{a} <br/>{b} : {c}"
+    	    },
+    	    legend: {
+    	        left: 'left',
+    	        data: ['其它','航线一','航线二','定检']
+    	    },
+            dataZoom:{
+                show:true,
+                realtime:true,
+            },
+            xAxis: {
+                type: 'time',
+                name:"日期"
+            },
+            yAxis:{
+                type:'value',
+                name:"数量",
+                min:0,
+                max:9,
+                interval:1,
+            },
+    	    series : [
+                {
+                    name: '其它',
+                    type: 'scatter',
+                    data: {{ json_other | safe}},
+                },
+                {
+                    name: '航线一',
+                    type: 'scatter',
+                    data: {{ json_airline_1 | safe}},
+                },
+                {
+                    name: '航线二',
+                    type: 'scatter',
+                    data: {{ json_airline_2 | safe}},
+                },
+                {
+                    name: '定检',
+                    type: 'scatter',
+                    data: {{ json_certain | safe}},
+                }
+            ]
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+</script>
+{% endblock %}
