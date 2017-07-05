@@ -1,3 +1,3 @@
 cd /d %cd%
-python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 192.168.1.120:8000
 cmd /k
